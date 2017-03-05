@@ -1,0 +1,74 @@
+<resources>
+    <string name="app_name">Transfer Bansko</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <!-- menu items -->
+    <string name="order">Order</string>
+    <string name="information">Information</string>
+    <string name="prices">Prices</string>
+    <string name="contacts">Contacts</string>
+    <string name="terms_and_conditions"><![CDATA[Terms & conditions]]></string>
+
+    <!-- page content -->
+    <string name="info_text"><![CDATA[<H2>Booking</H2>1. Carefully fill out the form and click "send"<br>2. Check your email to confirm the transfer (valid 24 hours)<H2>Reservation information</H2>- No surcharges for early or late trip.<br>- Free child seats specified in the online booking form.<br>- In the case of a flight delay we are waiting for you at the airport for free<br><H2>Book with us</H2>Our standards: experienced, dependable drivers, clean cars, safe driving.<br>This is a private transfers, no waiting for other passengers.<br>Your transfer directly to your hotel.<br>Your driver will stop for rest at your request.<br><br>The phone number for urgent communication with the carrier will be sent to Your e-mail together with the confirmation of the terms of the transfer.]]></string>
+    <string name="prices_text"><![CDATA[For private transfers (return) from Sofia or Bansko: <br><br>Executive or MPV car (1–3 persones) – 120 € (Return transfer)<br>Mini bus (4–7 persones) – 180 € (Return transfer)<br><br>• Prices for individual return transfer to Bansko.<br>• Transportation right to your hotel in Bansko, Razlog or Dobrinishte.<br>• No extra charge for early or late check-out.<br>• In the absence of other arrangements the driver picks you up from Bansko for 5 hours prior to departure.<br>• Free seats for children specify on the special form for online booking.<br>• Transfer takes around 2 hours and 40 minutes<br>• The driver takes BGN - leva EUR (1€ = 1.95 lv).<br>• Currency conversions according to the official, applicable on the territory of Bulgaria<br>• Coins are not accepted<br><br>Note:<br>Bansko Transfer acts only as an agent. Your contract with the company providing the transfers. All details sent via e-mail.]]></string>
+    <string name="contacts_text"><![CDATA[Contacts]]></string>
+    <string name="terms_text"><![CDATA[All vehicles are owned by a transfer service. All contacts with the company, and all correspondence, including conditions of carriage and payment is made directly with transfer company.<p> “Transfer Bansko&quot; is a partner and makes no warranties and is not responsible for the actions of the shipping company. We do not accept claims under the terms of the service during transportation.]]></string>
+
+    <!-- controls -->
+    <string name="choose_your_transfer">Choose your transfer:</string>
+    <string name="return_transfer">Return transfer</string>
+    <string name="arrival">Arrival</string>
+    <string name="departure">Departure</string>
+    <string name="child_seats">Child seats</string>
+    <string name="number_of_passengers">Number of passengers</string>
+    <string name="your_name">Your Name</string>
+    <string name="your_e_mail">Your e-mail</string>
+    <string name="your_phone">Your phone</string>
+    <string name="mpv_car">Executive or MPV car (1–3 persons)</string>
+    <string name="mini_bus">Mini bus (4–7 persons)</string>
+    <string name="date">Date</string>
+    <string name="time">Time</string>
+    <string name="flight">Flight</string>
+
+    <!-- validation messages -->
+    <string name="invalid_destination">Select transfer destination</string>
+    <string name="invalid_transport_type">Select transport type</string>
+    <string name="invalid_dates">Set arrival or departure date and time</string>
+    <string name="invalid_arrival_time">Arrival date and time are not set</string>
+    <string name="invalid_departure_time">Departure date and time are not set</string>
+    <string name="invalid_passengers_count">Set correct number of passengers</string>
+    <string name="invalid_child_seats_count">Set correct number of child seats</string>
+    <string name="invalid_name">Input name</string>
+    <string name="invalid_email">Email is not correct</string>
+    <string name="invalid_phone">Phone number is not correct</string>
+
+    <!-- notifications -->
+    <string name="common_error">Something went wrong. Try to repeat action.</string>
+    <string name="no_internet">Check your internet connection</string>
+    <string name="sent_approve">Thank you. Your message sent. Please check your e-mail within 24 hours.</string>
+
+    <!-- email -->
+    <string name="email_title">Order for transfer.</string>
+    <string name="email_template" formatted="false"><![CDATA[
+<br>Transfer: %s
+<br>
+<br>Sender Name: %s
+<br>Е-mail: %s
+<br>Phone: %s
+<br>
+<br><b>Details arrival:</b> %s
+<br><b>Details departure:</b> %s
+<br><b>Transport:</b> %s
+<br><b>Number of passengers:</b> %s
+<br><b>Child seats:</b> %s
+<br><b>Total amount:</b> %s
+
+<br>
+<br>Comment: %s]]>
+ </string>
+    <string name="total_amount">TOTAL AMOUNT: </string>
+
+</resources>

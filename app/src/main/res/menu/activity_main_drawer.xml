@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group
+        android:id="@+id/menu_actions"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_order"
+            android:icon="@drawable/ic_directions_car_black"
+            android:title="@string/order" />
+    </group>
+
+    <group
+        android:id="@+id/menu_info"
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_info"
+            android:icon="@drawable/ic_info_black"
+            android:title="@string/information" />
+        <item
+            android:id="@+id/nav_prices"
+            android:icon="@drawable/ic_euro_symbol_black"
+            android:title="@string/prices" />
+        <item
+            android:id="@+id/nav_contacts"
+            android:icon="@drawable/ic_mail_outline"
+            android:title="@string/contacts" />
+        <item
+            android:id="@+id/nav_terms"
+            android:icon="@drawable/ic_copyright_black"
+            android:title="@string/terms_and_conditions" />
+    </group>
+
+</menu>
