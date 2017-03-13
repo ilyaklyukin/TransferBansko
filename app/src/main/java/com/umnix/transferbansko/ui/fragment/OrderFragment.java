@@ -8,14 +8,12 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
-import android.widget.Spinner;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -27,9 +25,7 @@ import com.umnix.transferbansko.model.TransportType;
 import com.umnix.transferbansko.utils.ViewUtility;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 import java.util.Locale;
 
 import butterknife.BindView;
@@ -38,9 +34,6 @@ import butterknife.OnClick;
 import butterknife.OnTextChanged;
 
 public class OrderFragment extends BaseFragment implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
-
-    @BindView(R.id.destination)
-    protected Spinner destinationSpinner;
 
     @BindView(R.id.date_input)
     protected EditText dateInput;
@@ -93,6 +86,9 @@ public class OrderFragment extends BaseFragment implements DatePickerDialog.OnDa
     @BindView(R.id.comments_input)
     protected EditText commentsInput;
 
+    @BindView(R.id.destination_group)
+    protected RadioGroup destinationGroup;
+
     private Calendar calendar = Calendar.getInstance();
 
     private Order order = new Order();
@@ -117,30 +113,55 @@ public class OrderFragment extends BaseFragment implements DatePickerDialog.OnDa
     }
 
     private void initControls() {
+        getFilledOrder();
+        totalAmountValue.setText(order.calcTotalAmount());
+    }
 
-        List<String> destinations = new ArrayList<>();
-        for (Destination destination : Destination.values()) {
-            destinations.add(destination.getDescription());
-        }
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, destinations);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+    @OnClick(R.id.dest_sofia_bansko_choice)
+    protected void onDestination1Select() {
+        getFilledOrder();
 
-        destinationSpinner.setAdapter(adapter);
+        totalAmountValue.setText(order.calcTotalAmount());
+    }
 
-        destinationSpinner.setOnItemSelectedListener(
-                new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        order.setDestination(Destination.fromDescription((String) destinationSpinner.getSelectedItem()));
-                        totalAmountValue.setText(order.calcTotalAmount());
-                    }
+    @OnClick(R.id.dest_bansko_sofia_choice)
+    protected void onDestination2Select() {
+        getFilledOrder();
 
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) {
+        totalAmountValue.setText(order.calcTotalAmount());
+    }
 
-                    }
-                }
-        );
+    @OnClick(R.id.dest_plovdiv_bansko_choice)
+    protected void onDestination3Select() {
+        getFilledOrder();
+
+        totalAmountValue.setText(order.calcTotalAmount());
+    }
+
+    @OnClick(R.id.dest_bansko_plovdiv_choice)
+    protected void onDestination4Select() {
+        getFilledOrder();
+
+        totalAmountValue.setText(order.calcTotalAmount());
+    }
+
+    @OnClick(R.id.dest_thessaloniki_bansko_choice)
+    protected void onDestination5Select() {
+        getFilledOrder();
+
+        totalAmountValue.setText(order.calcTotalAmount());
+    }
+
+    @OnClick(R.id.dest_bansko_thessaloniki_choice)
+    protected void onDestination6Select() {
+        getFilledOrder();
+
+        totalAmountValue.setText(order.calcTotalAmount());
+    }
+
+    @OnClick(R.id.dest_different_choice)
+    protected void onDestination7Select() {
+        getFilledOrder();
 
         totalAmountValue.setText(order.calcTotalAmount());
     }
@@ -292,7 +313,11 @@ public class OrderFragment extends BaseFragment implements DatePickerDialog.OnDa
 
     public Order getFilledOrder() {
 
-        order.setDestination(Destination.fromDescription((String) destinationSpinner.getSelectedItem()));
+        int radioButtonID = destinationGroup.getCheckedRadioButtonId();
+        RadioButton radioButton = (RadioButton) destinationGroup.findViewById(radioButtonID);
+        String destination = radioButton.getText().toString();
+
+        order.setDestination(Destination.fromDescription(destination));
 
         order.setPassengersCount(passengerCountInput.getText().toString());
         order.setChildCount(childCountInput.getText().toString());
