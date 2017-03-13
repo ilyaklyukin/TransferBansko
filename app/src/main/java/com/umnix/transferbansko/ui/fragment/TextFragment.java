@@ -1,6 +1,7 @@
 package com.umnix.transferbansko.ui.fragment;
 
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -42,11 +43,36 @@ public class TextFragment extends BaseFragment {
 
         if (infoType != null) {
             String content = infoType.getContent(getActivity());
-            infoView.setText(Html.fromHtml(content));
+            infoView.setText(Html.fromHtml(content, new ImageGetter(), null));
         }
 
         animateFadeIn(view);
 
         return view;
+    }
+
+    private class ImageGetter implements Html.ImageGetter {
+
+        public Drawable getDrawable(String source) {
+            int id;
+
+            id = getResources().getIdentifier(source, "drawable", getActivity().getPackageName());
+
+            if (id == 0) {
+                // the drawable resource wasn't found in our package, maybe it is a stock android drawable?
+                id = getResources().getIdentifier(source, "drawable", "android");
+            }
+
+            if (id == 0) {
+                // prevent a crash if the resource still can't be found
+                return null;
+            }
+            else {
+                Drawable d = getResources().getDrawable(id);
+                d.setBounds(0,0,d.getIntrinsicWidth(),d.getIntrinsicHeight());
+                return d;
+            }
+        }
+
     }
 }

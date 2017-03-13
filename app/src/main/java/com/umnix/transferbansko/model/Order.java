@@ -6,7 +6,7 @@ import android.text.TextUtils;
 public class Order {
 
     private Destination destination;
-    private boolean isNeedReturn;
+    private boolean isNeedReturn = true;
     private TransportType transportType = TransportType.MPV;
 
     private String arrivalDate;
@@ -20,8 +20,27 @@ public class Order {
     private String passengersCount;
     private String childCount;
     private String clientName;
+    private String clientHotel;
     private String clientEmail;
     private String clientPhone;
+
+    private String comments;
+
+    public String getComments() {
+        return comments;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
+    }
+
+    public String getClientHotel() {
+        return clientHotel;
+    }
+
+    public void setClientHotel(String clientHotel) {
+        this.clientHotel = clientHotel;
+    }
 
     public String getArrivalFlight() {
         return arrivalFlight;
@@ -147,6 +166,7 @@ public class Order {
         String content = String.format(template,
                 getDestination().getDescription(),
                 getClientName(),
+                getClientHotel(),
                 getClientEmail(),
                 getClientPhone(),
                 arrivalInfo,
@@ -155,7 +175,7 @@ public class Order {
                 getPassengersCount(),
                 getChildCount(),
                 calcTotalAmount(),
-                "-" // TODO: comments field
+                getComments()
         );
 
         return content;

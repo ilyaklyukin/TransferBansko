@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -34,6 +35,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
@@ -98,21 +100,18 @@ public class MainActivity extends AppCompatActivity
     private void subscribeToEvents() {
         subscriptions = new CompositeDisposable();
 
-        Disposable subscription = serviceBus.getSentEmailState().subscribe(
-                isSent -> {
-                    if (isSent) {
-                        Snackbar.make(fab, R.string.sent_approve, Snackbar.LENGTH_LONG)
-                                .setAction("Action", null).show();
-                    } else {
-                        Snackbar.make(fab, R.string.common_error, Snackbar.LENGTH_LONG)
-                                .setAction("Action", null).show();
-                    }
-                },
-                throwable -> {
-                    Snackbar.make(fab, R.string.common_error, Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
-                }
-        );
+        Disposable subscription = serviceBus.getSentEmailState()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        isSent -> {
+                            if (isSent) {
+                                showMessage(getString(R.string.confirmation), getString(R.string.sent_approve));
+                            } else {
+                                showMessage(getString(R.string.error), getString(R.string.common_error));
+                            }
+                        },
+                        throwable -> showMessage(getString(R.string.error), getString(R.string.common_error))
+                );
 
         subscriptions.add(subscription);
     }
@@ -229,41 +228,13 @@ public class MainActivity extends AppCompatActivity
         String invalidFieldDescription = orderValidator.getNextError(order);
         if (!TextUtils.isEmpty(invalidFieldDescription)) {
             Timber.e(invalidFieldDescription);
-            Snackbar.make(fab, invalidFieldDescription, Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
+            showMessage(getString(R.string.invalid_data), invalidFieldDescription);
             return;
         }
 
         sendEmail(order);
     }
 
-    private void sendEmail() {
-
-        Disposable subscription = Observable.defer(() -> Observable.just(null))
-                .subscribeOn(Schedulers.io())
-
-                .subscribe(
-                        o -> {
-                            try {
-                                GMailSender sender = new GMailSender("ilya.klyukin@gmail.com", "masterkey1");
-                                sender.sendMail("This is Subject",
-                                        "This is Body",
-                                        "test@gmail.com",
-                                        "ilya.klyukin@gmail.com");
-
-                                serviceBus.postSentEmailState(true);
-                            } catch (Exception e) {
-                                Timber.e(e, e.getLocalizedMessage());
-                                serviceBus.postSentEmailState(false);
-                            }
-                        },
-                        e -> {
-                            serviceBus.postSentEmailState(false);
-                            Timber.e(e, "Error on sending email");
-                        }
-                );
-        subscriptions.add(subscription);
-    }
 
     private boolean sendEmail(Order order) {
         Observable.defer(() -> Observable.just(order))
@@ -297,4 +268,17 @@ public class MainActivity extends AppCompatActivity
 
         return true;
     }
+
+    private void showMessage(String title, String message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setTitle(title)
+                .setMessage(message)
+                .setIcon(R.mipmap.ic_launcher)
+                .setCancelable(false)
+                .setNegativeButton(getString(R.string.OK), (dialog, id) -> dialog.cancel());
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+
 }

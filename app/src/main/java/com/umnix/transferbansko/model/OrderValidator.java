@@ -33,7 +33,7 @@ public class OrderValidator {
             return context.getString(R.string.invalid_transport_type);
         }
 
-        if (!isTimeSet(order)) {
+        /*if (!isTimeSet(order)) {
             return context.getString(R.string.invalid_dates);
         }
 
@@ -43,18 +43,22 @@ public class OrderValidator {
 
         if (!isDepartureDateTimeValid(order)) {
             return context.getString(R.string.invalid_departure_time);
-        }
+        }*/
 
-        if (!isPassengersCountValid(order)) {
+        /*if (!isPassengersCountValid(order)) {
             return context.getString(R.string.invalid_passengers_count);
         }
 
         if (!isChildCountValid(order)) {
             return context.getString(R.string.invalid_child_seats_count);
         }
-
+*/
         if (!isClientNameValid(order)) {
             return context.getString(R.string.invalid_name);
+        }
+
+        if (!isClientHotelValid(order)) {
+            return context.getString(R.string.invalid_hotel);
         }
 
         if (!isClientEmailValid(order)) {
@@ -122,6 +126,10 @@ public class OrderValidator {
 
     private boolean isClientNameValid(Order order) {
         return !TextUtils.isEmpty(order.getClientName());
+    }
+
+    private boolean isClientHotelValid(Order order) {
+        return !TextUtils.isEmpty(order.getClientHotel());
     }
 
     private boolean isClientEmailValid(Order order) {

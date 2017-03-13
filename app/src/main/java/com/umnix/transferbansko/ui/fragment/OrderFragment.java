@@ -57,6 +57,9 @@ public class OrderFragment extends BaseFragment implements DatePickerDialog.OnDa
     @BindView(R.id.name_input)
     protected EditText nameInput;
 
+    @BindView(R.id.hotel_input)
+    protected EditText hotelInput;
+
     @BindView(R.id.email_input)
     protected EditText emailInput;
 
@@ -86,6 +89,9 @@ public class OrderFragment extends BaseFragment implements DatePickerDialog.OnDa
 
     @BindView(R.id.clear_date)
     protected ImageView clearDate;
+
+    @BindView(R.id.comments_input)
+    protected EditText commentsInput;
 
     private Calendar calendar = Calendar.getInstance();
 
@@ -135,6 +141,8 @@ public class OrderFragment extends BaseFragment implements DatePickerDialog.OnDa
                     }
                 }
         );
+
+        totalAmountValue.setText(order.calcTotalAmount());
     }
 
     private void setDate() {
@@ -292,8 +300,11 @@ public class OrderFragment extends BaseFragment implements DatePickerDialog.OnDa
         order.setNeedReturn(returnTransferInput.isChecked());
 
         order.setClientName(nameInput.getText().toString());
+        order.setClientHotel(hotelInput.getText().toString());
         order.setClientEmail(emailInput.getText().toString());
         order.setClientPhone(phoneInput.getText().toString());
+
+        order.setComments(commentsInput.getText().toString());
 
         if (mpvCarSelection.isChecked()) {
             order.setTransportType(TransportType.MPV);
