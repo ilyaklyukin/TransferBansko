@@ -14,6 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/choose_your_transfer"
+            android:textColor="@android:color/black"
             android:textSize="14sp" />
 
         <RadioGroup
@@ -94,6 +95,44 @@
                 android:layout_height="wrap_content"
                 android:text="@string/mini_bus" />
         </RadioGroup>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/total_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/total_amount"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/total_amount_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/payment_info"
+            android:textSize="12sp" />
 
         <RadioGroup
             android:layout_width="fill_parent"
@@ -191,13 +230,6 @@
             android:hint="@string/your_name" />
 
         <EditText
-            android:id="@+id/hotel_input"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@string/your_hotel" />
-
-        <EditText
             android:id="@+id/email_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -213,10 +245,18 @@
             android:hint="@string/your_phone"
             android:inputType="phone" />
 
+        <EditText
+            android:id="@+id/hotel_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/your_hotel" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/comments"
+            android:textColor="@android:color/black"
             android:textSize="14sp" />
 
         <EditText
@@ -226,27 +266,14 @@
             android:ems="10"
             android:lines="4" />
 
-        <LinearLayout
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/attention"
+            android:textSize="14sp" />
 
-            <TextView
-                android:id="@+id/total_amount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="@string/total_amount"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/total_amount_value"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
-                android:textSize="14sp" />
-        </LinearLayout>
     </LinearLayout>
 </ScrollView>
