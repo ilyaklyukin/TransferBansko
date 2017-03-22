@@ -154,14 +154,28 @@ public class Order {
         this.passengersCount = passengersCount;
     }
 
-    public String fillContent(String template) {
-        String arrivalInfo = TextUtils.isEmpty(getArrivalDate()) ?
-                "-" :
-                getArrivalDate() + ", " + getArrivalTime() + ", " + getArrivalFlight();
+    private String formFlightInfo(String date, String time, String flight) {
+        String flightInfo = "-";
 
-        String departureInfo = TextUtils.isEmpty(getDepartureDate()) ?
-                "-" :
-                getDepartureDate() + ", " + getDepartureTime() + ", " + getDepartureFlight();
+        if (!TextUtils.isEmpty(date)) {
+            flightInfo = date;
+        }
+
+        if (!TextUtils.isEmpty(time)) {
+            flightInfo = flightInfo + " " + time;
+        }
+
+        if (!TextUtils.isEmpty(flight)) {
+            flightInfo = flightInfo + ", \"" + flight + "\"";
+        }
+
+        return flightInfo;
+    }
+
+    public String fillContent(String template) {
+
+        String arrivalInfo = formFlightInfo(getArrivalDate(), getArrivalTime(), getArrivalFlight());
+        String departureInfo = formFlightInfo(getDepartureDate(), getDepartureTime(), getDepartureFlight());
 
         String content = String.format(template,
                 getDestination().getDescription(),
