@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -89,6 +90,9 @@ public class OrderFragment extends BaseFragment implements DatePickerDialog.OnDa
     @BindView(R.id.destination_group)
     protected RadioGroup destinationGroup;
 
+    @BindView(R.id.order_scroll)
+    protected ScrollView orderScroll;
+
     private Calendar calendar = Calendar.getInstance();
 
     private Order order = new Order();
@@ -115,6 +119,9 @@ public class OrderFragment extends BaseFragment implements DatePickerDialog.OnDa
     private void initControls() {
         getFilledOrder();
         totalAmountValue.setText(order.calcTotalAmount());
+
+        orderScroll.getViewTreeObserver().addOnGlobalLayoutListener(
+                () -> orderScroll.post(() -> orderScroll.fullScroll(View.FOCUS_UP)));
     }
 
     @OnClick(R.id.dest_sofia_bansko_choice)
