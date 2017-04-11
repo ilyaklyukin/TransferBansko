@@ -121,7 +121,16 @@ public class OrderFragment extends BaseFragment implements DatePickerDialog.OnDa
         totalAmountValue.setText(order.calcTotalAmount());
 
         orderScroll.getViewTreeObserver().addOnGlobalLayoutListener(
-                () -> orderScroll.post(() -> orderScroll.fullScroll(View.FOCUS_UP)));
+                () -> {
+                    if (orderScroll != null) {
+                        orderScroll.post(() -> {
+                                    if (orderScroll != null) {
+                                        orderScroll.fullScroll(View.FOCUS_UP);
+                                    }
+                                }
+                        );
+                    }
+                });
     }
 
     @OnClick(R.id.dest_sofia_bansko_choice)

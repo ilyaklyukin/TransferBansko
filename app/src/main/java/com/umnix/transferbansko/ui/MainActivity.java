@@ -17,7 +17,9 @@ import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.TextView;
 
+import com.umnix.transferbansko.BuildConfig;
 import com.umnix.transferbansko.R;
 import com.umnix.transferbansko.TransferApplication;
 import com.umnix.transferbansko.model.Order;
@@ -56,6 +58,8 @@ public class MainActivity extends AppCompatActivity
     @BindView(R.id.nav_view)
     protected NavigationView navigationView;
 
+    private TextView menuCaption;
+
     @Inject
     ServiceBus serviceBus;
 
@@ -80,6 +84,9 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
 
         navigationView.setNavigationItemSelectedListener(this);
+
+        menuCaption = (TextView) navigationView.getHeaderView(0).findViewById(R.id.menu_caption);
+        menuCaption.setText(getString(R.string.app_name) + " v." + BuildConfig.VERSION_NAME);
 
         addFragment();
 
