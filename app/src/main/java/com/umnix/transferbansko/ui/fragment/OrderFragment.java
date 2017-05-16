@@ -32,6 +32,7 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnFocusChange;
 import butterknife.OnTextChanged;
 
 public class OrderFragment extends BaseFragment implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
@@ -120,7 +121,7 @@ public class OrderFragment extends BaseFragment implements DatePickerDialog.OnDa
         getFilledOrder();
         totalAmountValue.setText(order.calcTotalAmount());
 
-        orderScroll.getViewTreeObserver().addOnGlobalLayoutListener(
+       /* orderScroll.getViewTreeObserver().addOnGlobalLayoutListener(
                 () -> {
                     if (orderScroll != null) {
                         orderScroll.post(() -> {
@@ -130,7 +131,7 @@ public class OrderFragment extends BaseFragment implements DatePickerDialog.OnDa
                                 }
                         );
                     }
-                });
+                });*/
     }
 
     @OnClick(R.id.dest_sofia_bansko_choice)
@@ -311,12 +312,28 @@ public class OrderFragment extends BaseFragment implements DatePickerDialog.OnDa
                 calendar.get(Calendar.DAY_OF_MONTH)).show();
     }
 
+    @OnFocusChange(R.id.date_input)
+    protected void onDateFocus(boolean hasFocus) {
+        if (!hasFocus){
+            return;
+        }
+        onDateClick();
+    }
+
     @OnClick(R.id.time_input)
     protected void onTimeClick() {
         new TimePickerDialog(getActivity(),
                 this,
                 calendar.get(Calendar.HOUR_OF_DAY),
                 calendar.get(Calendar.MINUTE), true).show();
+    }
+
+    @OnFocusChange(R.id.time_input)
+    protected void onTimeFocus(boolean hasFocus) {
+        if (!hasFocus){
+            return;
+        }
+        onTimeClick();
     }
 
     @Override
