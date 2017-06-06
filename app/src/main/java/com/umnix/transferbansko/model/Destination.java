@@ -7,8 +7,8 @@ public enum Destination {
     BAN_SOF("Bansko -> Sofia", 60, 100),
     PLOV_BAN("Plovdiv -> Bansko", 65, 110),
     PAN_PLOV("Bansko -> Plovdiv", 65, 110),
-    THES_BAN("Thessaloniki -> Bansko", 120, 150),
-    BAN_THES("Bansko -> Thessaloniki", 120, 150),
+    THES_BAN("Thessaloniki -> Bansko", 100, 120),
+    BAN_THES("Bansko -> Thessaloniki", 100, 120),
     OTHER("Different Route", 0, 0);
 
     private String description;
